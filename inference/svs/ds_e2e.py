@@ -11,6 +11,10 @@ import utils
 
 
 class DiffSingerE2EInfer(BaseSVSInfer):
+    def __init__(self, hparams_update):
+        super().__init__(hparams)
+        hparams.update(hparams_update)
+
     def build_model(self):
         model = GaussianDiffusion(
             phone_encoder=self.ph_encoder,

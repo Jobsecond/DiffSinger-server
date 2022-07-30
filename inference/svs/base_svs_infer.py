@@ -123,7 +123,7 @@ class BaseSVSInfer:
             #  0        0          1
             if len(note_in_this_word) > 1:  # is_slur = True, we should repeat the YUNMU to match the 2nd, 3rd... notes.
                 for idx in range(1, len(note_in_this_word)):
-                    ph_lst.append(ph_in_this_word[1])
+                    ph_lst.append(ph_in_this_word[-1])
                     note_lst.append(note_in_this_word[idx])
                     midi_dur_lst.append(midi_dur_in_this_word[idx])
                     is_slur.append(1)
@@ -232,13 +232,16 @@ class BaseSVSInfer:
         return output
 
     @classmethod
-    def example_run(cls, inp):
+    def example_run(cls, inp, config='', exp_name='', output='infer_out/example_out.wav'):
         from utils.audio import save_wav
-        set_hparams(print_hparams=False)
+        if not config:
+            set_hparams(print_hparams=False, command_line=True)
+        else:
+            set_hparams(config=config, exp_name=exp_name, print_hparams=False, command_line=False)
         infer_ins = cls(hparams)
         out = infer_ins.infer_once(inp)
         os.makedirs('infer_out', exist_ok=True)
-        save_wav(out, f'infer_out/example_out.wav', hparams['audio_sample_rate'])
+        save_wav(out, output, hparams['audio_sample_rate'])
 
 
 # if __name__ == '__main__':

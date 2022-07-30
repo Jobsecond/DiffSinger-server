@@ -1,0 +1,11 @@
+{
+  "server": {
+    "listen": "0.0.0.0",
+    "port": 14514
+  },
+  "diffsinger": {
+    "config": "usr/configs/midi/e2e/opencpop/ds100_adj_rel.yaml",
+    "exp_name": "0228_opencpop_ds100_rel",
+    "temp_output_prefix": "infer_out/temp_"
+  }
+}
